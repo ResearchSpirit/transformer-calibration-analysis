@@ -1,0 +1,13 @@
+model,class,precision,recall,f1
+IndoBERT,negative,0.9375,0.9375,0.9375
+IndoBERT,neutral,0.9,0.7159,0.7975
+IndoBERT,positive,0.9099,0.9902,0.9484
+IndoBERTweet,negative,0.9479,0.9615,0.9547
+IndoBERTweet,neutral,0.9836,0.6818,0.8054
+IndoBERTweet,positive,0.8947,1.0,0.9444
+TF-IDF+SVM,negative,0.8866,0.8269,0.8557
+TF-IDF+SVM,neutral,0.7347,0.4091,0.5255
+TF-IDF+SVM,positive,0.7549,0.951,0.8416
+Ensemble,negative,0.9366,0.9231,0.9298
+Ensemble,neutral,0.8103,0.5341,0.6438
+Ensemble,positive,0.8523,0.9902,0.9161
