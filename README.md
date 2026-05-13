@@ -173,3 +173,5 @@ This project is released under the [MIT License](LICENSE).
 ## Acknowledgements
 
 This work builds on the Indonesian NLP ecosystem, particularly the [IndoNLU benchmark](https://github.com/indobenchmark/indonlu) and the pre-trained models released by the Indonesian NLP research community. We thank the [Hugging Face](https://huggingface.co/) team for the Transformers library and model hub, the [PyTorch](https://pytorch.org/) team, the authors of [SHAP](https://github.com/shap/shap) for the interpretability tools central to this analysis, and the NusaCrowd initiative for aggregating Indonesian NLP resources.
+
+Latest update: 13/05/2026 - 21:36 (GMT+7)
