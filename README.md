@@ -119,8 +119,8 @@ The experiment proceeds in five stages:
 **Requirements:** Python 3.9+, CUDA-capable GPU recommended for transformer fine-tuning.
 
 ```bash
-git clone https://github.com/<your-username>/explainable-transformer.git
-cd explainable-transformer
+git clone https://github.com/ResearchSpirit/transformer-calibration-analysis
+cd transformer-calibration-analysis
 pip install -r requirements.txt
 ```
 
