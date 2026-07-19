@@ -151,13 +151,13 @@ The meta-learner is trained exclusively on held-out validation predictions — n
 If you use this code or find the diagnostic methodology useful, please cite:
 
 ```bibtex
-@inproceedings{wijaya2025explainability,
+@inproceedings{wijaya2026explainability,
   title     = {Explainability-Driven Analysis of Transformer Ensemble Calibration Failure
                in Indonesian Social Media Sentiment Analysis},
   author    = {Wijaya, Stanley Nathanael and Anderies},
   booktitle = {Proceedings of the International Conference on Informatics, Multimedia,
                and Technology (ICIMTECH)},
-  year      = {2025},
+  year      = {2026},
   address   = {Jakarta, Indonesia}
 }
 ```
