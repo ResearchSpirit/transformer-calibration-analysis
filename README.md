@@ -1,13 +1,33 @@
 # Explainability-Driven Analysis of Transformer Ensemble Calibration Failure in Indonesian Social Media Sentiment Analysis
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c)](https://pytorch.org/)
-[![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-yellow)](https://huggingface.co/docs/transformers)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-ffcc4d?logo=huggingface&logoColor=black)](https://huggingface.co/docs/transformers)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-f7931e?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
 [![SHAP](https://img.shields.io/badge/SHAP-0.43%2B-orange)](https://github.com/shap/shap)
+[![Jupyter](https://img.shields.io/badge/Made%20with-Jupyter-f37626?logo=jupyter&logoColor=white)](notebooks/)
+[![Dataset](https://img.shields.io/badge/Dataset-IndoNLU%20SmSA-6a5acd)](https://github.com/indobenchmark/indonlu)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Conference](https://img.shields.io/badge/Conference-ICIMTECH-lightgrey)]()
+[![Conference](https://img.shields.io/badge/Conference-ICIMTECH%202026-lightgrey)](paper/)
 
 > Empirical analysis and explainability-driven diagnosis showing that naïve stacking of heterogeneous transformer and non-neural base learners degrades ensemble performance through probability calibration mismatch — identified via SHAP attribution on the meta-learner.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Key Contributions](#key-contributions)
+- [Repository Structure](#repository-structure)
+- [Directory Guide](#directory-guide)
+- [Experimental Pipeline](#experimental-pipeline)
+- [Main Results](#main-results)
+- [Installation](#installation)
+- [Reproducibility](#reproducibility)
+- [Documentation](#documentation)
+- [Citation](#citation)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -33,27 +53,63 @@ The central finding is that the full stacking ensemble scores only F1-Macro 0.82
 
 ## Repository Structure
 
-```
+```text
 .
-├── paper.tex                                            # LaTeX source of the conference paper
-├── requirements.txt                                     # Python dependencies
-├── final_code_explainable_transformer_experiment.ipynb  # Main experiment notebook
-├── generate_updated_figures.ipynb                       # Figure regeneration notebook
-├── outputs/
-│   ├── figures/                                         # All publication figures (fig1–fig8)
+├── README.md                     # This file
+├── LICENSE                       # MIT license
+├── requirements.txt              # Python dependencies
+├── .gitignore                    # Ignore rules for archives, checkpoints, and caches
+│
+├── notebooks/                    # Executable research pipeline
+│   ├── final_code_explainable_transformer_experiment.ipynb   # Main end-to-end experiment
+│   └── generate_updated_figures.ipynb                        # Standalone figure regeneration
+│
+├── outputs/                      # All generated research artifacts (git-tracked where lightweight)
+│   ├── Diagram.png                                      # Stacking ensemble architecture diagram
+│   ├── figures/                                         # Publication figures (fig1–fig8)
 │   ├── metrics/                                         # CSV files: model metrics, ablation, per-class, SHAP, efficiency
-│   ├── models/                                          # Saved model weights and tokenizer configs
+│   ├── models/                                          # Saved model weights, tokenizer configs, meta-learner
 │   │   ├── indobert/
 │   │   ├── indobertweet/
 │   │   ├── probas/                                      # Saved base learner probability arrays (.npy)
 │   │   ├── meta_learner.pkl
 │   │   ├── tfidf.pkl
-│   │   └── svm_clf.pkl
-│   ├── predictions/
-│   │   ├── test_predictions.csv
-│   │   └── failure_cases.csv
-│   └── Diagram.png                                      # Stacking ensemble architecture diagram
+│   │   ├── svm_clf.pkl
+│   │   └── timing.json
+│   └── predictions/
+│       ├── test_predictions.csv
+│       └── failure_cases.csv
+│
+├── paper/                        # Everything related to the written paper
+│   ├── paper.tex                                        # LaTeX source of the conference paper
+│   ├── submission/                                      # Camera-ready PDF, submitted .tex, reviewer replies
+│   │   └── rev-1/                                       # Round-1 revision package
+│   └── turnitin/                                        # Plagiarism / AI-detection compliance reports
+│       └── archived/                                    # Superseded similarity reports
+│
+├── tasks/                        # Internal task prompts used to direct iterative repo work
+│                                  # (drafting, revision, restructuring instructions — not part of the
+│                                  #  research pipeline itself)
+│
+└── archive/                      # Preserved legacy / non-core artifacts (excluded from Git)
+    ├── notebooks/                                       # Superseded experiment notebook
+    ├── documents/                                       # Old paper drafts and PDF versions
+    └── experiments/                                     # Early standalone experiment scripts
 ```
+
+---
+
+## Directory Guide
+
+| Directory | Purpose | Tracked by Git? |
+|---|---|---|
+| `notebooks/` | The executable research pipeline. `final_code_explainable_transformer_experiment.ipynb` runs the full pipeline (preprocessing → training → stacking → SHAP → ablation → failure analysis) end to end and is fully resumable via checkpoints in `outputs/`. `generate_updated_figures.ipynb` regenerates Figures 2, 3, and 8 only, from already-saved CSVs, without retraining. | Yes |
+| `outputs/` | Every artifact that can be *regenerated* by rerunning the notebooks: figures, metrics tables, predictions, and model checkpoints. Lightweight files (figures, metrics, tokenizer configs) are tracked; large binaries (`.pt`, `.bin`, `.safetensors`, `.pkl`, `.npy`) are git-ignored — see [Reproducibility](#reproducibility). | Partially (see `.gitignore`) |
+| `paper/` | The paper itself and everything tied to its submission: LaTeX source, the camera-ready/submitted packages, reviewer correspondence, and Turnitin/AI-detection compliance reports. | No (git-ignored; kept locally for reference) |
+| `tasks/` | Free-form instruction files used to direct AI-assisted work on this repository over time (paper revisions, README/figure upgrades, this restructuring). Not part of the experimental pipeline — safe to ignore if you're only interested in reproducing the research. | No (git-ignored) |
+| `archive/` | Superseded material kept for historical reference instead of being deleted: an earlier experiment notebook, older paper drafts, and standalone scripts from before the pipeline was consolidated into `notebooks/`. Nothing here is required to reproduce the reported results. | No (git-ignored) |
+
+**Rule of thumb:** if a file can be recreated by rerunning the notebooks, it belongs in `outputs/`. If it documents or supports the paper itself, it belongs in `paper/`. Anything superseded goes to `archive/` rather than being deleted.
 
 ---
 
@@ -124,17 +180,19 @@ cd transformer-calibration-analysis
 pip install -r requirements.txt
 ```
 
-Run the main experiment notebook:
+Run the main experiment notebook (executes the full pipeline; resumable via `outputs/` checkpoints):
 
 ```bash
-jupyter notebook final_code_explainable_transformer_experiment.ipynb
+jupyter notebook notebooks/final_code_explainable_transformer_experiment.ipynb
 ```
 
-To regenerate updated figures independently:
+To regenerate Figures 2, 3, and 8 only, from already-saved CSVs (no retraining):
 
 ```bash
-jupyter notebook generate_updated_figures.ipynb
+jupyter notebook notebooks/generate_updated_figures.ipynb
 ```
+
+> Both notebooks read and write paths relative to the **repository root** (e.g. `outputs/figures/...`). Launch Jupyter from the repository root — not from inside `notebooks/` — so these relative paths resolve correctly.
 
 ---
 
@@ -143,6 +201,18 @@ jupyter notebook generate_updated_figures.ipynb
 All experiments use fixed random seeds across PyTorch, NumPy, and scikit-learn. Transformer fine-tuning hyperparameters are held constant across IndoBERT and IndoBERTweet to isolate the effect of pre-training domain rather than optimization differences. Saved model weights, probability arrays (`.npy`), and the fitted meta-learner are provided in `outputs/models/` so downstream evaluation and SHAP analysis can be reproduced without re-training.
 
 The meta-learner is trained exclusively on held-out validation predictions — not training-set predictions — preventing target leakage and ensuring reported metrics reflect out-of-distribution generalization. All metrics reported in the paper are computed directly from `outputs/metrics/` CSV files for full traceability.
+
+Large binary artifacts (fine-tuned transformer weights `.safetensors`, the SVM/meta-learner `.pkl` files, and cached probability `.npy` arrays) are excluded from Git via `.gitignore` to keep the repository lightweight — see [`outputs/models/`](outputs/models/) locally after running the pipeline, or rerun `notebooks/final_code_explainable_transformer_experiment.ipynb` to regenerate them from scratch. Lightweight, directly citable artifacts (figures, metrics CSVs, tokenizer configs, predictions) remain version-controlled.
+
+---
+
+## Documentation
+
+- **This README** covers the research overview, results, and how to run the pipeline.
+- **[Directory Guide](#directory-guide)** above explains what each top-level folder contains and why.
+- **`paper/paper.tex`** is the authoritative LaTeX source of the paper; `paper/submission/` contains the camera-ready and revision packages actually sent to the conference.
+- **In-notebook documentation.** `notebooks/final_code_explainable_transformer_experiment.ipynb` contains a "Paper → Output Mapping" section at the end that maps every reported table and figure to its exact source file in `outputs/`.
+- **`tasks/`** documents the process behind non-research repository work (paper revisions, this restructuring) for anyone curious how the repository evolved; it is not required reading to reproduce the experiments.
 
 ---
 
@@ -174,4 +244,4 @@ This project is released under the [MIT License](LICENSE).
 
 This work builds on the Indonesian NLP ecosystem, particularly the [IndoNLU benchmark](https://github.com/indobenchmark/indonlu) and the pre-trained models released by the Indonesian NLP research community. We thank the [Hugging Face](https://huggingface.co/) team for the Transformers library and model hub, the [PyTorch](https://pytorch.org/) team, the authors of [SHAP](https://github.com/shap/shap) for the interpretability tools central to this analysis, and the NusaCrowd initiative for aggregating Indonesian NLP resources.
 
-Latest update: 13/05/2026 - 21:36 (GMT+7)
+Latest update: 14/08/2026 (GMT+7)
