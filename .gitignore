@@ -1,0 +1,65 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Paper manuscript
+# The published paper is distributed by IEEE (copyright holder). Read it at
+# https://doi.org/10.1109/ICIMTech202671078.2026.11698984 — the LaTeX/PDF
+# manuscript is kept locally only and never committed.
+# ─────────────────────────────────────────────────────────────────────────────
+paper/
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Large / regenerable model artifacts (recreated by the main notebook)
+# Lightweight files (configs, tokenizers, timing.json) stay version-controlled.
+# ─────────────────────────────────────────────────────────────────────────────
+outputs/models/probas/
+outputs/models/**/*.safetensors
+outputs/models/**/*.bin
+outputs/models/**/*.pt
+outputs/models/**/*.pth
+outputs/models/**/*.ckpt
+outputs/models/**/*.pkl
+outputs/models/**/*.npy
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Local working folders (not part of the published research artifact)
+# ─────────────────────────────────────────────────────────────────────────────
+archive/
+tasks/
+drafts/
+submission/
+turnitin/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Python / Jupyter
+# ─────────────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.env
+.python-version
+
+# Experiment trackers & caches
+wandb/
+mlruns/
+.cache/
+hf_cache/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OS / editor
+# ─────────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

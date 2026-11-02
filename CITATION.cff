@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this code or the diagnostic methodology, please cite the paper below."
+title: "Explainability-Driven Analysis of Transformer Ensemble Calibration Failure in Indonesian Social Media Sentiment Analysis — Code and Artifacts"
+type: software
+license: MIT
+repository-code: "https://github.com/ResearchSpirit/transformer-calibration-analysis"
+authors:
+  - family-names: Wijaya
+    given-names: Stanley Nathanael
+    affiliation: "Computer Science Department, School of Computer Science, Bina Nusantara University"
+  - name: Anderies
+    affiliation: "Computer Science Department, School of Computer Science, Bina Nusantara University"
+keywords:
+  - sentiment analysis
+  - Indonesian NLP
+  - ensemble learning
+  - IndoBERT
+  - SHAP
+  - probability calibration
+preferred-citation:
+  type: conference-paper
+  title: "Explainability-Driven Analysis of Transformer Ensemble Calibration Failure in Indonesian Social Media Sentiment Analysis"
+  authors:
+    - family-names: Wijaya
+      given-names: Stanley Nathanael
+    - name: Anderies
+  collection-title: "2026 International Conference on Information Management and Technology (ICIMTech)"
+  conference:
+    name: "2026 International Conference on Information Management and Technology (ICIMTech 2026)"
+    city: Tangerang
+    country: ID
+    date-start: "2026-08-19"
+    date-end: "2026-08-20"
+  publisher:
+    name: IEEE
+  year: 2026
+  month: 8
+  start: 96
+  end: 101
+  doi: "10.1109/ICIMTech202671078.2026.11698984"
+  url: "https://ieeexplore.ieee.org/document/11698984"
